@@ -1,0 +1,42 @@
+The execution was successful
+
+- Initializing Data Flow Task (Success)
+
+- Initializing Connections (Success)
+
+- Setting SQL Command (Success)
+
+- Setting Source Connection (Success)
+
+- Setting Destination Connection (Success)
+
+- Validating (Success)
+	Messages
+	* Warning 0x80049304: Data Flow Task 1: Warning: Could not open global shared memory to communicate with performance DLL; data flow performance counters are not available.  To resolve, run this package as an administrator, or on the system's console.
+	 (SQL Server Import and Export Wizard)
+	
+
+- Prepare for Execute (Success)
+
+- Pre-execute (Success)
+	Messages
+	* Information 0x402090dc: Data Flow Task 1: The processing of file "C:\Users\sourp\Desktop\Cyclistic_bikeshare\Tables\station_data_raw.csv" has started.
+	 (SQL Server Import and Export Wizard)
+	
+
+- Executing (Success)
+
+- Copying to C:\Users\sourp\Desktop\Cyclistic_bikeshare\Tables\station_data_raw.csv (Success)
+	* 5376 rows transferred
+
+- Post-execute (Success)
+	Messages
+	* Information 0x402090dd: Data Flow Task 1: The processing of file "C:\Users\sourp\Desktop\Cyclistic_bikeshare\Tables\station_data_raw.csv" has ended.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x4004300b: Data Flow Task 1: "Destination - station_data_raw_csv" wrote 5376 rows.
+	 (SQL Server Import and Export Wizard)
+	
+
+
+

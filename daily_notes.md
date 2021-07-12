@@ -19,21 +19,33 @@ I am treating this file as a journal of sorts, just to record more personal note
 
 #### Issues
 * more Nulls found in the 'start_station_name' and 'start_station_id'  
-> The amount of null start station + end stations together probably account for ~7-8% of the dataset.  
-> While the latitude and longitude values are missing as well for all the end_station data, they are present for the start stations.  
-> Current potential solution is to alter the tables once again. I currently will plan to split the trip_data table into two separate tables, trip_data and station_data. 
->    
-> trip_data will contain:
->  * ride_id (char)
->  * rideable_type (char)
->  * started_at (dt)
->  * ended_at (dt)
->  * start_station_id (int)
->  * end_station_id (int)
->  * member_casual (char)  
->    
-> station_data will contain:
-> * station_id (int)
-> * station_name (char)
-> * station_lat (float)
-> * station_lng (float)
+> The amount of null start station + end stations together account for ~7-8% of the dataset.  
+> Data cannot be assumed where the latitude or longitude provided or from past station data  
+> Most likely data will be excluded from the analysis
+
+Working on cleaning the dataset, going through checklist
+- [x] Sources of errors
+- [x] Null data
+  * Used subquery to remove rows with NULLS in start and end stations
+- [ ] Misspelled words
+- [ ] Mistyped numbers
+- [ ] Extra spaces and characters
+- [x] Duplicates
+  * Removing duplicates with the group by function
+- [x] Mismatched data types
+- [ ] Messy (inconsistent) strings
+- [ ] Messy (inconsistent) date formats
+- [x] Misleading variable labes(columns)
+- [ ] Truncated data
+- [ ] Business Logic
+
+> ### word vomit  
+> Spent a lot of time trying to see if I could keep any of the rows with Nulls in the start_station_name. Doing so may have taught me the lesson to always double check the data I have before writing anything.  
+>  
+>So I had created a new temporary table which I had played with a lot. I was trying to isolate just the station information like name, id, and geographical location. I was using a union to avoid duplicates is the start and end columns, rounding the latitude and longitude to make the data more consistent, and dealing with multiple ids for one station.  
+>  
+>I finally got a table I was happy with and exported it to a csv to manipulate in excel. Except once I import the data and start to filter it, I finally realize that there is virtually no crossover between the lat/long of the Nulls and the Non Nulls. Something I probably could have verified instead of just assuming. 
+>  
+>  A frustrating way to learn a lesson, but glad I learned it either way.
+
+>  I am midway through creating a temporary table for a clean dataset. Hope to spend a lot more time on it tomorrow and finish up the above list. Have ideas to add a duration column to sort out.

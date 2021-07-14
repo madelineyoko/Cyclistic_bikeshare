@@ -49,3 +49,20 @@ Working on cleaning the dataset, going through checklist
 >  A frustrating way to learn a lesson, but glad I learned it either way.
 
 >  I am midway through creating a temporary table for a clean dataset. Hope to spend a lot more time on it tomorrow and finish up the above list. Have ideas to add a duration column to sort out.
+
+
+### 2021-07-12
+#### Issues
+* How to display duration
+* How to solve for rows where ended_at is prior to started_at time
+
+> ### word vomit
+> The main focus of the day, inside the cleaning of the dataset, was focused on dates and date formatting.  
+>  
+>Deciding how I wanted to display the date was a larger issue. Looking at the dataset the range of timespans was also decently large, from a few seconds to over 2 months. I was trying to decide on a format that would both make the data easier to work with through analysis and future visualizations, keeping it in a datetime adjacent format, and making a table and data that was easy to understand very quickly. I have learned that 1990-01-01 00:00:00.000 acts as the basedate, or equivalent of 0, in datetime. Because of this, durations such as a minute and 30 seconds would appear more complicated eg. '1990-01-01 00:01:30.000'
+>  
+>I spent too much time searching for solutions, ways I could potentially extract individual pieces of the datetime data and then jigsaw it back together. Eventually I found [this article](https://www.sqlteam.com/articles/working-with-time-spans-and-durations-in-sql-server) by Jeff Smith. It gave me good knowledge about to abandon, such as ideas about stitching together substrings to look like proper dates, and the limitations for SQL, such as presenting timespans beyond days. 
+>  
+>  Ultimately I decided on displaying the regular datetime format for time, using the DATEDIFF() function. Days I extracted into an additional column, along with months. While the data is not exactly pretty, for example, ocassionally displaying 1 month and 48 days, it fulfills it's purpose which was for me immediately telling the audience which particular datarows had durations that were much longer.
+>  
+>  I have completed my data cleaning after going through google's checklist and have a nice dataset to start some analysis on.

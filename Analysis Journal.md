@@ -29,4 +29,28 @@ I have made certain assumptions about the conditions under each value is present
 * In the span of 2020-12 to 2021-05, a distinguishment is made between `docked_bike` and `classic_bike`. By researching the company, I have learned that while casual riders must pay a fee to begin their rider and unlock the bicycle, this fee is waived for annual members. Therefore, I have assumed that `docked_bike`, `classic_bike` and `electric_bike` are present for casual riders to track the number of rides preceded by an unlock fee and all three values are available to casual riders. Likewise, `docked_bike` is no longer applicable to annual members and is not a valid value.  
   
 ##### `user_type`
-Two possible values exist for this attribute, `member` and `casual`, representing annual members and casual riders in that order.
+Two possible values exist for this attribute, `member` and `casual`, representing annual members and casual riders in that order.  
+  
+#### Temporary Table
+In order to examine this data easily, I created a temporary table using these three attributes.  
+Additionally, I used the COUNT() function to count the number of rides, grouped first by the month and year, bike type, and then user type.
+```SQL
+SELECT * INTO #rides_per_type FROM (
+	SELECT
+		DISTINCT DATEADD(MONTH, DATEDIFF(MONTH, 0, started_at), 0) AS year_month,
+		bike_type,
+		user_type,
+		COUNT(*) AS no_of_rides
+	FROM
+		trip_data_clean
+	GROUP BY DATEADD(MONTH, DATEDIFF(MONTH, 0, started_at), 0),
+		bike_type,
+		user_type
+) AS temp
+ORDER BY DATEADD(MONTH, DATEDIFF(MONTH, 0, temp.year_month), 0),
+		bike_type,
+		user_type
+;
+```
+I then transfered this data to a spreadsheet for ease of calculations.  
+Here, I calculated the percentage of casual user rides that used ebikes out of all the rides for casual users. Likewise, I calculated the percentage of member rides that used ebikes out of all member user rides.

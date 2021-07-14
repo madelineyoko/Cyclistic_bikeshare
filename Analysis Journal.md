@@ -53,4 +53,8 @@ ORDER BY DATEADD(MONTH, DATEDIFF(MONTH, 0, temp.year_month), 0),
 ;
 ```
 I then transfered this data to a spreadsheet for ease of calculations.  
-Here, I calculated the percentage of casual user rides that used ebikes out of all the rides for casual users. Likewise, I calculated the percentage of member rides that used ebikes out of all member user rides.
+Here, I calculated the percentage of casual user rides that used ebikes out of all the rides for casual users. Likewise, I calculated the percentage of member rides that used ebikes out of all member user rides.  
+  
+
+#### Observations:  
+![no_of_riders pivot table](https://user-images.githubusercontent.com/87314229/125673635-848a68c7-e6c1-40c1-98af-7eb5fbec4813.PNG)

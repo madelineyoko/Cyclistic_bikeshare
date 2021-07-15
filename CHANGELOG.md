@@ -56,8 +56,15 @@ SELECT * INTO trip_data_clean FROM (
 * new table -- trip_data_clean_v2
 
 #### Fixed
-trip_data_clean_v2 -> added clauses  
+trip_data_clean_v2 -> added `WHERE` clauses:
 * `DATEDIFF(second, started_at, ended_at) < 86400`  
-* `DATEDIFF(second, started_at, ended_at) > 60`
+* `DATEDIFF(second, started_at, ended_at) > 60`  
   
-Removes any rows where duration is less than 1 minute or over 24 hours. 
+Removes any rows where duration is less than 1 minute or over 24 hours.
+
+#### Removed  
+trip_data_clean_v2 -> removed `SELECT` for:  
+* `DATEDIFF(day, started_at, ended_at) AS duration_days`
+* `DATEDIFF(month, started_at, ended_at) AS duration_months`
+ 
+No duration over 24 hours. No longer need indication of days/months passed.

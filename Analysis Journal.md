@@ -181,11 +181,11 @@ ORDER BY
 This query returns a table for 3 columns and 14 rows. There are two instances of each day of the week, one for casual riders and the second for members. Each row returns the number of rides by each population per day of the week. 
 
 #### Observations:
-![image](https://user-images.githubusercontent.com/87314229/125816869-58a25df0-ad61-451a-8223-0a5d6bb78d36.png)
-*(Pivot table: Number of Rides organized by user type and day of the week)
-
-![image](https://user-images.githubusercontent.com/87314229/125817141-4ce1b7a1-d93e-4f31-9d25-5e74593a79b2.png)
-*(Column chart: Number of rides per day of the week, casual vs. member)  
+![image](https://user-images.githubusercontent.com/87314229/125816869-58a25df0-ad61-451a-8223-0a5d6bb78d36.png)  
+*(Pivot table: Number of Rides organized by user type and day of the week)*  
+  
+![image](https://user-images.githubusercontent.com/87314229/125817141-4ce1b7a1-d93e-4f31-9d25-5e74593a79b2.png)  
+*(Column chart: Number of rides per day of the week, casual vs. member)*  
   
 For casual rides, the bikes are most used on Saturday, making up for 23.44% of total casual rides. Sunday is the second highest day (19.53%), followed by Friday (14.34%). The remaining four weekdays are close to evenly split, each making up ~10% of usage.  
   

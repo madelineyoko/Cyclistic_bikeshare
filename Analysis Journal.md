@@ -125,10 +125,10 @@ Here, I created a pivot table of the two populations number of rides and the tot
   
 #### Observations: 
 ![image](https://user-images.githubusercontent.com/87314229/125794906-c6508962-4251-46f8-856d-506ed3c168ff.png)  
-*(Pivot Table: Number of Riders per month)*  
+*(Pivot Table: Number of Riders per month organized by user type)*  
   
 ![image](https://user-images.githubusercontent.com/87314229/125795065-f59e8317-4885-4eae-9028-0f155dad0a27.png)
-*(Stacked Bar Chart: Riders per month)*
+*(Stacked Bar Chart: Riders per month, casual vs members)*
   
 A year of Cycliystic bike usage seems to follow a general trend upwards from June 2020 to it's highest month of usage in August 2020, where casual riders totaled 28 0561 rides, and members 32 3791 rides. From this month, usage steadily decreases until Feburary 2021 reaching the lowest total usage of the year, casual rides totaling 8613 rides, and members 34 381.  
   
@@ -155,4 +155,43 @@ User desire for biking may also change with the weather. Extreme heat or extreme
 This may factor in the greater gap between members and casual riders during the winter season. Additionally, members have already paid for the entire year in order to ride, including the winter months. This may incentivise members to make more use of the bikes, even in poorer weather.
 
 ###### Tourism
-Weather Spark also reports a tourism score, favouring clear rainless days with temperatures between 18-27 degrees Celcius.  In the city of Chicago, the tourism score falls to a 0 in the months of December to Feburary. The months of June to September report the highest scores, the highest being 7.2. Tourism may also be a factor in the high number of casual riders during the summer season, as non residents seem very unlikely to purchase an annual membership.
+Weather Spark also reports a tourism score, favouring clear rainless days with temperatures between 18-27 degrees Celcius.  In the city of Chicago, the tourism score falls to a 0 in the months of December to Feburary. The months of June to September report the highest scores, the highest being 7.2. Tourism may also be a factor in the high number of casual riders during the summer season, as non residents seem very unlikely to purchase an annual membership.  
+  
+### Pursuit: Days of the week
+Is there a difference in usage depending on the day of the week between casual riders and members?
+
+#### Process:
+In order to amount of rides in each population separated by the days of the week, I wrote a query.
+```SQL
+SELECT
+	DATENAME(dw, started_at) AS day_of_week,
+	user_type,
+	COUNT(*) AS no_of_rides
+FROM 
+	trip_data_clean
+GROUP BY
+	DATENAME(dw, started_at),
+	user_type
+ORDER BY
+	user_type,
+	COUNT(*) DESC,
+	DATENAME(dw, started_at);
+```
+
+This query returns a table for 3 columns and 14 rows. There are two instances of each day of the week, one for casual riders and the second for members. Each row returns the number of rides by each population per day of the week. 
+
+#### Observations:
+![image](https://user-images.githubusercontent.com/87314229/125816869-58a25df0-ad61-451a-8223-0a5d6bb78d36.png)
+*(Pivot table: Number of Rides organized by user type and day of the week)
+
+![image](https://user-images.githubusercontent.com/87314229/125817141-4ce1b7a1-d93e-4f31-9d25-5e74593a79b2.png)
+*(Column chart: Number of rides per day of the week, casual vs. member)  
+  
+For casual rides, the bikes are most used on Saturday, making up for 23.44% of total casual rides. Sunday is the second highest day (19.53%), followed by Friday (14.34%). The remaining four weekdays are close to evenly split, each making up ~10% of usage.  
+  
+Members are much more evenly split. While Saturday sees the highest amount of usage at 15.27%, the lowest day for usage, Sunday is just 2.2% lower, making up 13.07% of total usage.  
+  
+#### Thoughts:
+It is not deeply surprising that for casual users the weeekends see the most usage of bikes.  
+From this information one could assume that for the majority of casual riders, biking is not incorporated into their regular schedule. While a casual member may be more inclined to ocassionally use a bike for transportation or an entertaining activity, an annual member likely uses the bike regularly in their day to day like, whether for commuting to work, for exercising, or running errands.
+

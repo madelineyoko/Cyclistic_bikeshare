@@ -58,7 +58,7 @@ Here, I calculated the percentage of casual user rides that used ebikes out of a
 
 #### Observations:  
 ![image](https://user-images.githubusercontent.com/87314229/125855793-f98fcfae-0814-4501-ae6c-8e2f07a94258.png)  
-*(Picot table: number of classic, docked, and electric bikes used, casual vs members)
+*(Pivot table: number of classic, docked, and electric bikes used, casual vs members)*
   
   
 From September 2020 to May 2021, casual riders report a stronger rate of use for ebikes than annual members, accounting for 9 out of the 11 months ebikes have been available.  The remaining two months with a lower usage, July 2020 and August 2020, represent the month of the ebikes release and the immediate following month.  

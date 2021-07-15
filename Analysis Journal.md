@@ -6,7 +6,7 @@ __Identify key behavioural differences between members and casual riders.__
   
 ## 2021-07-14
 ### Pursuit: Bike_types
-Is there a significant difference between the preferred bike type of casual riders and annual members?
+Is there a significant difference between the usage of bike type from casual riders and annual members?
 
 #### Process:
 In order to determine the whether or not there was a difference in the preference of ebikes between casuals and members I first had to examine the attributes of the dataset available to me.  
@@ -71,4 +71,56 @@ Casual riders maintain higher usage of ebikes than annual members, particularly 
 Annual members have access to unlimited 45min rides. They are charged only once annually for $108, or $9 per month. However, these unlimited rides account only for use of the classic bikes. Use of an ebike for both casual riders and members is considered an upgrade, and both classes of riders are charged additional fees upon use. For an annual member who has already paid a large fee for the use of the service, this additional fee may incentivise them to choose the classic bike over an ebike more often.  
 This fee is mostly likely not as strong a deterent for casual riders. While ebikes also require additional fees, the casual rider had not already spent any money in order to ride a bicycle and would be more likely to spend the money for the single use of the ebike.  
   
-Potential a larger discount on ebike usage for members, as currently it is only $0.05 cheaper for members to upgrade, might incentivise more casual riders to pay for a membership, but this seems unlikely. It may incentivise those who are already members to make more use of ebikes, but does not seem strong enough to convince many people to buy a membership as even the highest rate of usage is below 40% for a month.
+Potential a larger discount on ebike usage for members, as currently it is only $0.05 cheaper for members to upgrade, might incentivise more casual riders to pay for a membership, but this seems unlikely. It may incentivise those who are already members to make more use of ebikes, but does not seem strong enough to convince many people to buy a membership as even the highest rate of usage is below 40% for a month.  
+  
+  
+## 2021-07-15
+### Pursuit: Month of ride
+How does usage of bikes between casuals and members on a month to month basis?
+
+#### Process:
+In this analysis I chose to make use of the previous temporary table just slightly altered as I had already calculated the sum of riders on a monthly basis.  
+Here I commented out `bike_type` to better see the total number of riders.
+```SQL
+SELECT * INTO #rides_per_type FROM (
+	SELECT
+		DISTINCT DATEADD(MONTH, DATEDIFF(MONTH, 0, started_at), 0) AS year_month,
+		--bike_type,
+		user_type,
+		COUNT(*) AS no_of_rides
+	FROM
+		trip_data_clean
+	GROUP BY DATEADD(MONTH, DATEDIFF(MONTH, 0, started_at), 0),
+		--bike_type,
+		user_type
+) AS temp
+ORDER BY DATEADD(MONTH, DATEDIFF(MONTH, 0, temp.year_month), 0),
+		--bike_type,
+		user_type
+;
+```
+  
+For ease of comparison, I used a window function to calculated the total number of rides per month. Additionally, I calculated the percentage of rides from each population that made up the total.  
+A `WHERE` clause was also added to filter by month
+```SQL
+SELECT 
+	year_month,
+	user_type,
+	no_of_rides,
+	SUM(no_of_rides) OVER
+		(PARTITION BY year_month) AS rides_per_month,
+	ROUND(CAST(no_of_rides AS float)/SUM(no_of_rides) OVER(PARTITION BY year_month) *100, 2) AS prcnt
+FROM 
+	#rides_per_type
+--WHERE 
+	--year_month = '2020-08-01 00:00:00.000'
+ORDER BY 
+	year_month, 
+	user_type
+;
+```
+  
+Finally, I transfered the data to a spread sheet.  
+Here, I created a pivot table of the two populations number of rides and the total number of rides per month. I also created some visualizations to better see the trends through the year.  Both can be see in the Observations section below.  
+  
+#### Observations: 

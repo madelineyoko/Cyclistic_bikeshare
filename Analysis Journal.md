@@ -42,7 +42,7 @@ SELECT * INTO #rides_per_type FROM (
 		user_type,
 		COUNT(*) AS no_of_rides
 	FROM
-		trip_data_clean
+		trip_data_clean_v2
 	GROUP BY DATEADD(MONTH, DATEDIFF(MONTH, 0, started_at), 0),
 		bike_type,
 		user_type
@@ -57,18 +57,21 @@ Here, I calculated the percentage of casual user rides that used ebikes out of a
   
 
 #### Observations:  
-![no_of_riders pivot table](https://user-images.githubusercontent.com/87314229/125673635-848a68c7-e6c1-40c1-98af-7eb5fbec4813.PNG)
+![image](https://user-images.githubusercontent.com/87314229/125855793-f98fcfae-0814-4501-ae6c-8e2f07a94258.png)  
+*(Picot table: number of classic, docked, and electric bikes used, casual vs members)
   
   
 From September 2020 to May 2021, casual riders report a stronger rate of use for ebikes than annual members, accounting for 9 out of the 11 months ebikes have been available.  The remaining two months with a lower usage, July 2020 and August 2020, represent the month of the ebikes release and the immediate following month.  
   
-The highest usage for ebikes in both populations peaks in Novemeber 2020. 37.19% of rides by casual riders in this month were had on ebikes, and 29.80% for members. This peak occurs in the middle of the highest percentages for ebike use, September 2020 to January 2021. In Feburary 2021 A sharp drop in percentage occurs in both populations and steadily varies by ~3% each month, averaging at 20.90% usage for casual riders, and 18.42% for members.  
+The highest usage for ebikes in both populations peaks in Novemeber 2020. 37.27% of rides by casual riders in this month were had on ebikes, and 29.88% for members. This peak occurs in the middle of the highest percentages for ebike use, September 2020 to January 2021. In Feburary 2021 A sharp drop in percentage occurs in both populations and steadily varies by less than 3% each month, averaging at 20.90% usage for casual riders, and 18.42% for members.  
   
 The difference between rate of ebike use between casual riders and annual members is maximum of 9.02%, averaging at about a 3.77% difference per month. 
 
 #### Thoughts:
 Casual riders maintain higher usage of ebikes than annual members, particularly near the winter months. I can make assumptions based off the bikeshares pricing plans for this observation.  
+  
 Annual members have access to unlimited 45min rides. They are charged only once annually for $108, or $9 per month. However, these unlimited rides account only for use of the classic bikes. Use of an ebike for both casual riders and members is considered an upgrade, and both classes of riders are charged additional fees upon use. For an annual member who has already paid a large fee for the use of the service, this additional fee may incentivise them to choose the classic bike over an ebike more often.  
+  
 This fee is mostly likely not as strong a deterent for casual riders. While ebikes also require additional fees, the casual rider had not already spent any money in order to ride a bicycle and would be more likely to spend the money for the single use of the ebike.  
   
 Potential a larger discount on ebike usage for members, as currently it is only $0.05 cheaper for members to upgrade, might incentivise more casual riders to pay for a membership, but this seems unlikely. It may incentivise those who are already members to make more use of ebikes, but does not seem strong enough to convince many people to buy a membership as even the highest rate of usage is below 40% for a month.  
@@ -89,7 +92,7 @@ SELECT * INTO #rides_per_type FROM (
 		user_type,
 		COUNT(*) AS no_of_rides
 	FROM
-		trip_data_clean
+		trip_data_clean_v2
 	GROUP BY DATEADD(MONTH, DATEDIFF(MONTH, 0, started_at), 0),
 		--bike_type,
 		user_type
@@ -124,17 +127,17 @@ Finally, I transfered the data to a spread sheet.
 Here, I created a pivot table of the two populations number of rides and the total number of rides per month. I also created some visualizations to better see the trends through the year.  Both can be see in the Observations section below.  
   
 #### Observations: 
-![image](https://user-images.githubusercontent.com/87314229/125794906-c6508962-4251-46f8-856d-506ed3c168ff.png)  
+![image](https://user-images.githubusercontent.com/87314229/125857032-25454be2-a1c7-4fe1-a885-344fe485f19d.png)
 *(Pivot Table: Number of Riders per month organized by user type)*  
   
-![image](https://user-images.githubusercontent.com/87314229/125795065-f59e8317-4885-4eae-9028-0f155dad0a27.png)
+![image](https://user-images.githubusercontent.com/87314229/125857057-b8a2cacb-47de-4125-bad9-c9ea3f52ad1e.png)
 *(Stacked Bar Chart: Riders per month, casual vs members)*
   
-A year of Cycliystic bike usage seems to follow a general trend upwards from June 2020 to it's highest month of usage in August 2020, where casual riders totaled 28 0561 rides, and members 32 3791 rides. From this month, usage steadily decreases until Feburary 2021 reaching the lowest total usage of the year, casual rides totaling 8613 rides, and members 34 381.  
+A year of Cycliystic bike usage seems to follow a general trend upwards from June 2020 to it's highest month of usage in August 2020, where casual riders totaled 277 789, rides, and members 318 269 rides. From this month, usage steadily decreases until Feburary 2021 reaching the lowest total usage of the year, casual rides totaling 8485 rides, and members 33 785 rides.  
   
-The greatest difference in usage between the two populations follows a similar trend. In the months of June, July and August, casual riders account for ~2-10% less rides than. annual members. After August, this gap steadily increases, reaching it's maximum range in January, where annual member usage accounted for 64.82% more rides than casual riders.
+The greatest difference in usage between the two populations follows a similar trend. In the months of June, July and August, casual riders account for ~2-10% less rides than. annual members. After August, this gap steadily increases, reaching it's maximum range in January, where annual member usage accounted for 64.72% more rides than casual riders.
 
-There is a significant increase in casual riders usage in March, where the difference in usage is 26.46% againt the previous months 59.94% difference. The gap shallows in just two months, with only a 3.84% difference in usage in May 2021.  
+There is a significant increase in casual riders usage in March, where the difference in usage is 26.26% againt the previous months 59.86% difference. The gap shallows in just two months, with only a 3.6% difference in usage in May 2021.  
 
 #### Thoughts: 
 My immediate thoughts about the vast changes in usage through the months all seem related to the weather.  
@@ -168,7 +171,7 @@ SELECT
 	user_type,
 	COUNT(*) AS no_of_rides
 FROM 
-	trip_data_clean
+	trip_data_clean_v2
 GROUP BY
 	DATENAME(dw, started_at),
 	user_type
@@ -181,15 +184,15 @@ ORDER BY
 This query returns a table for 3 columns and 14 rows. There are two instances of each day of the week, one for casual riders and the second for members. Each row returns the number of rides by each population per day of the week. 
 
 #### Observations:
-![image](https://user-images.githubusercontent.com/87314229/125816869-58a25df0-ad61-451a-8223-0a5d6bb78d36.png)  
+![image](https://user-images.githubusercontent.com/87314229/125858224-5f19606d-bb88-4c47-94c6-c5649921299f.png)
 *(Pivot table: Number of Rides organized by user type and day of the week)*  
   
-![image](https://user-images.githubusercontent.com/87314229/125817141-4ce1b7a1-d93e-4f31-9d25-5e74593a79b2.png)  
+![image](https://user-images.githubusercontent.com/87314229/125858247-ca162172-4a33-4470-ac47-4dc1437f6154.png)
 *(Column chart: Number of rides per day of the week, casual vs. member)*  
   
-For casual rides, the bikes are most used on Saturday, making up for 23.44% of total casual rides. Sunday is the second highest day (19.53%), followed by Friday (14.34%). The remaining four weekdays are close to evenly split, each making up ~10% of usage.  
+For casual rides, the bikes are most used on Saturday, making up for 23.44% of total casual rides. Sunday is the second highest day (19.52%), followed by Friday (14.34%). The remaining four weekdays are close to evenly split, each making up ~10% of usage.  
   
-Members are much more evenly split. While Saturday sees the highest amount of usage at 15.27%, the lowest day for usage, Sunday is just 2.2% lower, making up 13.07% of total usage.  
+Members are much more evenly split. While Saturday sees the highest amount of usage at 15.25%, the lowest day for usage, Sunday is just 2.2% lower, making up 13.05% of total usage.  
   
 #### Thoughts:
 It is not deeply surprising that for casual users the weeekends see the most usage of bikes.  

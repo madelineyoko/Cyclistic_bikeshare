@@ -137,3 +137,22 @@ The greatest difference in usage between the two populations follows a similar t
 There is a significant increase in casual riders usage in March, where the difference in usage is 26.46% againt the previous months 59.94% difference. The gap shallows in just two months, with only a 3.84% difference in usage in May 2021.  
 
 #### Thoughts: 
+My immediate thoughts about the vast changes in usage through the months all seem related to the weather.  
+  
+Using [Weather Spark](https://weatherspark.com/y/14091/Average-Weather-in-Chicago-Illinois-United-States-Year-Round), an average year of weather in Chicago reports a typical hot season, from early June until late September, and a cold season, from early December to the early of March. Wind is strongest from October to May, and calmest in the months of June, July and August. Rain persists thoughout the year, though the most occurs in the 31 days surrounding June 1st. Finally, a snowy season is present through the months of December to March.  
+  
+These specific weather conditions appear to be in correlation with the usage of certain bikes. We might assume then that certain factors which affect bike usage might also be in correlation with the weather.  
+* Bike availability/condition
+* User desire
+* Tourism
+
+###### Bike availability and condition
+Rain, snow, and cold are not often optimal for the maintenance of equipment, and bikes seem to be no exception. Bikes which are damaged or in need of repair may result in overall lower usage for winter months.
+Upon examining Cyclysitc policy as well, not all bikes are reported to be in the system in winter months. Cyclystic during this time reduces the amount of bicycles available in order to match ridership demands. In severe weather, they also report that bikes may be reduced or entirely unavailable until the weather has cleared.
+
+###### User desire
+User desire for biking may also change with the weather. Extreme heat or extreme cold may be deterrants for usage and might encourage users to find other means of transportation. While extreme heat would not seem to have as strong an effect, extreme cold may arise potential safety concerns for cyclists, especially for those less experienced riding in poorer weather conditions.  
+This may factor in the greater gap between members and casual riders during the winter season. Additionally, members have already paid for the entire year in order to ride, including the winter months. This may incentivise members to make more use of the bikes, even in poorer weather.
+
+###### Tourism
+Weather Spark also reports a tourism score, favouring clear rainless days with temperatures between 18-27 degrees Celcius.  In the city of Chicago, the tourism score falls to a 0 in the months of December to Feburary. The months of June to September report the highest scores, the highest being 7.2. Tourism may also be a factor in the high number of casual riders during the summer season, as non residents seem very unlikely to purchase an annual membership.

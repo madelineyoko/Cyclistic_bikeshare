@@ -127,10 +127,10 @@ Finally, I transfered the data to a spread sheet.
 Here, I created a pivot table of the two populations number of rides and the total number of rides per month. I also created some visualizations to better see the trends through the year.  Both can be see in the Observations section below.  
   
 #### Observations: 
-![image](https://user-images.githubusercontent.com/87314229/125857032-25454be2-a1c7-4fe1-a885-344fe485f19d.png)
+![image](https://user-images.githubusercontent.com/87314229/125858591-e46301ce-eb62-4175-abec-9c0edf9797db.png)  
 *(Pivot Table: Number of Riders per month organized by user type)*  
   
-![image](https://user-images.githubusercontent.com/87314229/125857057-b8a2cacb-47de-4125-bad9-c9ea3f52ad1e.png)
+![image](https://user-images.githubusercontent.com/87314229/125857057-b8a2cacb-47de-4125-bad9-c9ea3f52ad1e.png)  
 *(Stacked Bar Chart: Riders per month, casual vs members)*
   
 A year of Cycliystic bike usage seems to follow a general trend upwards from June 2020 to it's highest month of usage in August 2020, where casual riders totaled 277 789, rides, and members 318 269 rides. From this month, usage steadily decreases until Feburary 2021 reaching the lowest total usage of the year, casual rides totaling 8485 rides, and members 33 785 rides.  
@@ -184,10 +184,10 @@ ORDER BY
 This query returns a table for 3 columns and 14 rows. There are two instances of each day of the week, one for casual riders and the second for members. Each row returns the number of rides by each population per day of the week. 
 
 #### Observations:
-![image](https://user-images.githubusercontent.com/87314229/125858224-5f19606d-bb88-4c47-94c6-c5649921299f.png)
+![image](https://user-images.githubusercontent.com/87314229/125858224-5f19606d-bb88-4c47-94c6-c5649921299f.png)  
 *(Pivot table: Number of Rides organized by user type and day of the week)*  
   
-![image](https://user-images.githubusercontent.com/87314229/125858247-ca162172-4a33-4470-ac47-4dc1437f6154.png)
+![image](https://user-images.githubusercontent.com/87314229/125858247-ca162172-4a33-4470-ac47-4dc1437f6154.png)  
 *(Column chart: Number of rides per day of the week, casual vs. member)*  
   
 For casual rides, the bikes are most used on Saturday, making up for 23.44% of total casual rides. Sunday is the second highest day (19.52%), followed by Friday (14.34%). The remaining four weekdays are close to evenly split, each making up ~10% of usage.  

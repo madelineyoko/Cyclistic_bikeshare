@@ -6,7 +6,7 @@ __Identify key behavioural differences between members and casual riders.__
   
 ## 2021-07-14
 ### Pursuit: Bike_types
-Is there a significant difference between the preferred bike type of casual riders and annual members?
+Is there a significant difference between the usage of bike type from casual riders and annual members?
 
 #### Process:
 In order to determine the whether or not there was a difference in the preference of ebikes between casuals and members I first had to examine the attributes of the dataset available to me.  
@@ -71,4 +71,127 @@ Casual riders maintain higher usage of ebikes than annual members, particularly 
 Annual members have access to unlimited 45min rides. They are charged only once annually for $108, or $9 per month. However, these unlimited rides account only for use of the classic bikes. Use of an ebike for both casual riders and members is considered an upgrade, and both classes of riders are charged additional fees upon use. For an annual member who has already paid a large fee for the use of the service, this additional fee may incentivise them to choose the classic bike over an ebike more often.  
 This fee is mostly likely not as strong a deterent for casual riders. While ebikes also require additional fees, the casual rider had not already spent any money in order to ride a bicycle and would be more likely to spend the money for the single use of the ebike.  
   
-Potential a larger discount on ebike usage for members, as currently it is only $0.05 cheaper for members to upgrade, might incentivise more casual riders to pay for a membership, but this seems unlikely. It may incentivise those who are already members to make more use of ebikes, but does not seem strong enough to convince many people to buy a membership as even the highest rate of usage is below 40% for a month.
+Potential a larger discount on ebike usage for members, as currently it is only $0.05 cheaper for members to upgrade, might incentivise more casual riders to pay for a membership, but this seems unlikely. It may incentivise those who are already members to make more use of ebikes, but does not seem strong enough to convince many people to buy a membership as even the highest rate of usage is below 40% for a month.  
+  
+  
+## 2021-07-15
+### Pursuit: Month of ride
+How does usage of bikes between casuals and members on a month to month basis?
+
+#### Process:
+In this analysis I chose to make use of the previous temporary table just slightly altered as I had already calculated the sum of riders on a monthly basis.  
+Here I commented out `bike_type` to better see the total number of riders.
+```SQL
+SELECT * INTO #rides_per_type FROM (
+	SELECT
+		DISTINCT DATEADD(MONTH, DATEDIFF(MONTH, 0, started_at), 0) AS year_month,
+		--bike_type,
+		user_type,
+		COUNT(*) AS no_of_rides
+	FROM
+		trip_data_clean
+	GROUP BY DATEADD(MONTH, DATEDIFF(MONTH, 0, started_at), 0),
+		--bike_type,
+		user_type
+) AS temp
+ORDER BY DATEADD(MONTH, DATEDIFF(MONTH, 0, temp.year_month), 0),
+		--bike_type,
+		user_type
+;
+```
+  
+For ease of comparison, I used a window function to calculated the total number of rides per month. Additionally, I calculated the percentage of rides from each population that made up the total.  
+A `WHERE` clause was also added to filter by month
+```SQL
+SELECT 
+	year_month,
+	user_type,
+	no_of_rides,
+	SUM(no_of_rides) OVER
+		(PARTITION BY year_month) AS rides_per_month,
+	ROUND(CAST(no_of_rides AS float)/SUM(no_of_rides) OVER(PARTITION BY year_month) *100, 2) AS prcnt
+FROM 
+	#rides_per_type
+--WHERE 
+	--year_month = '2020-08-01 00:00:00.000'
+ORDER BY 
+	year_month, 
+	user_type
+;
+```
+  
+Finally, I transfered the data to a spread sheet.  
+Here, I created a pivot table of the two populations number of rides and the total number of rides per month. I also created some visualizations to better see the trends through the year.  Both can be see in the Observations section below.  
+  
+#### Observations: 
+![image](https://user-images.githubusercontent.com/87314229/125794906-c6508962-4251-46f8-856d-506ed3c168ff.png)  
+*(Pivot Table: Number of Riders per month organized by user type)*  
+  
+![image](https://user-images.githubusercontent.com/87314229/125795065-f59e8317-4885-4eae-9028-0f155dad0a27.png)
+*(Stacked Bar Chart: Riders per month, casual vs members)*
+  
+A year of Cycliystic bike usage seems to follow a general trend upwards from June 2020 to it's highest month of usage in August 2020, where casual riders totaled 28 0561 rides, and members 32 3791 rides. From this month, usage steadily decreases until Feburary 2021 reaching the lowest total usage of the year, casual rides totaling 8613 rides, and members 34 381.  
+  
+The greatest difference in usage between the two populations follows a similar trend. In the months of June, July and August, casual riders account for ~2-10% less rides than. annual members. After August, this gap steadily increases, reaching it's maximum range in January, where annual member usage accounted for 64.82% more rides than casual riders.
+
+There is a significant increase in casual riders usage in March, where the difference in usage is 26.46% againt the previous months 59.94% difference. The gap shallows in just two months, with only a 3.84% difference in usage in May 2021.  
+
+#### Thoughts: 
+My immediate thoughts about the vast changes in usage through the months all seem related to the weather.  
+  
+Using [Weather Spark](https://weatherspark.com/y/14091/Average-Weather-in-Chicago-Illinois-United-States-Year-Round), an average year of weather in Chicago reports a typical hot season, from early June until late September, and a cold season, from early December to the early of March. Wind is strongest from October to May, and calmest in the months of June, July and August. Rain persists thoughout the year, though the most occurs in the 31 days surrounding June 1st. Finally, a snowy season is present through the months of December to March.  
+  
+These specific weather conditions appear to be in correlation with the usage of certain bikes. We might assume then that certain factors which affect bike usage might also be in correlation with the weather.  
+* Bike availability/condition
+* User desire
+* Tourism
+
+###### Bike availability and condition
+Rain, snow, and cold are not often optimal for the maintenance of equipment, and bikes seem to be no exception. Bikes which are damaged or in need of repair may result in overall lower usage for winter months.
+Upon examining Cyclysitc policy as well, not all bikes are reported to be in the system in winter months. Cyclystic during this time reduces the amount of bicycles available in order to match ridership demands. In severe weather, they also report that bikes may be reduced or entirely unavailable until the weather has cleared.
+
+###### User desire
+User desire for biking may also change with the weather. Extreme heat or extreme cold may be deterrants for usage and might encourage users to find other means of transportation. While extreme heat would not seem to have as strong an effect, extreme cold may arise potential safety concerns for cyclists, especially for those less experienced riding in poorer weather conditions.  
+This may factor in the greater gap between members and casual riders during the winter season. Additionally, members have already paid for the entire year in order to ride, including the winter months. This may incentivise members to make more use of the bikes, even in poorer weather.
+
+###### Tourism
+Weather Spark also reports a tourism score, favouring clear rainless days with temperatures between 18-27 degrees Celcius.  In the city of Chicago, the tourism score falls to a 0 in the months of December to Feburary. The months of June to September report the highest scores, the highest being 7.2. Tourism may also be a factor in the high number of casual riders during the summer season, as non residents seem very unlikely to purchase an annual membership.  
+  
+### Pursuit: Days of the week
+Is there a difference in usage depending on the day of the week between casual riders and members?
+
+#### Process:
+In order to amount of rides in each population separated by the days of the week, I wrote a query.
+```SQL
+SELECT
+	DATENAME(dw, started_at) AS day_of_week,
+	user_type,
+	COUNT(*) AS no_of_rides
+FROM 
+	trip_data_clean
+GROUP BY
+	DATENAME(dw, started_at),
+	user_type
+ORDER BY
+	user_type,
+	COUNT(*) DESC,
+	DATENAME(dw, started_at);
+```
+
+This query returns a table for 3 columns and 14 rows. There are two instances of each day of the week, one for casual riders and the second for members. Each row returns the number of rides by each population per day of the week. 
+
+#### Observations:
+![image](https://user-images.githubusercontent.com/87314229/125816869-58a25df0-ad61-451a-8223-0a5d6bb78d36.png)  
+*(Pivot table: Number of Rides organized by user type and day of the week)*  
+  
+![image](https://user-images.githubusercontent.com/87314229/125817141-4ce1b7a1-d93e-4f31-9d25-5e74593a79b2.png)  
+*(Column chart: Number of rides per day of the week, casual vs. member)*  
+  
+For casual rides, the bikes are most used on Saturday, making up for 23.44% of total casual rides. Sunday is the second highest day (19.53%), followed by Friday (14.34%). The remaining four weekdays are close to evenly split, each making up ~10% of usage.  
+  
+Members are much more evenly split. While Saturday sees the highest amount of usage at 15.27%, the lowest day for usage, Sunday is just 2.2% lower, making up 13.07% of total usage.  
+  
+#### Thoughts:
+It is not deeply surprising that for casual users the weeekends see the most usage of bikes.  
+From this information one could assume that for the majority of casual riders, biking is not incorporated into their regular schedule. While a casual member may be more inclined to ocassionally use a bike for transportation or an entertaining activity, an annual member likely uses the bike regularly in their day to day like, whether for commuting to work, for exercising, or running errands.
+

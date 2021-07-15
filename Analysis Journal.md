@@ -124,3 +124,16 @@ Finally, I transfered the data to a spread sheet.
 Here, I created a pivot table of the two populations number of rides and the total number of rides per month. I also created some visualizations to better see the trends through the year.  Both can be see in the Observations section below.  
   
 #### Observations: 
+![image](https://user-images.githubusercontent.com/87314229/125794906-c6508962-4251-46f8-856d-506ed3c168ff.png)  
+*(Pivot Table: Number of Riders per month)*  
+  
+![image](https://user-images.githubusercontent.com/87314229/125795065-f59e8317-4885-4eae-9028-0f155dad0a27.png)
+*(Stacked Bar Chart: Riders per month)*
+  
+A year of Cycliystic bike usage seems to follow a general trend upwards from June 2020 to it's highest month of usage in August 2020, where casual riders totaled 28 0561 rides, and members 32 3791 rides. From this month, usage steadily decreases until Feburary 2021 reaching the lowest total usage of the year, casual rides totaling 8613 rides, and members 34 381.  
+  
+The greatest difference in usage between the two populations follows a similar trend. In the months of June, July and August, casual riders account for ~2-10% less rides than. annual members. After August, this gap steadily increases, reaching it's maximum range in January, where annual member usage accounted for 64.82% more rides than casual riders.
+
+There is a significant increase in casual riders usage in March, where the difference in usage is 26.46% againt the previous months 59.94% difference. The gap shallows in just two months, with only a 3.84% difference in usage in May 2021.  
+
+#### Thoughts: 

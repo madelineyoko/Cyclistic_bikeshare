@@ -254,13 +254,17 @@ FROM trip_data_clean_v3
 ;
 ```  
   
-#### Observations 
+#### Observations:
 ![image](https://user-images.githubusercontent.com/87314229/125954596-e07de6f9-366d-49ac-b216-f89d0a0fc10a.png)  
-*(Table: descriptive statistics for duration of rides, casual vs members)  
+*(Table: descriptive statistics for duration of rides, casual vs members)*
 
 The range of ride durations included in the analysis extended from a minimum of 1 minute to 24 hours. The maximum and minimum ranges for both user types reflect this.  
   
-Each measure for duration is longer in the casual user. On average, rides by casual users seem to last 20 minutes longer than rides by annual members. Member rides are notably still shorter at the 3rd quartile than the casual ride average. 
+Each measure for duration is longer in the casual user. On average, rides by casual users seem to last 20 minutes longer than rides by annual members. Member rides are notably still shorter at the 3rd quartile than the casual ride average.  
   
-#### Thoughts  
+Both populations are positively skewed.
   
+#### Thoughts:  
+On the assumption that annual members have integrated bike riding more deeply into their everyday lives, the use of the bicycle for shorter amounts of time on average does make some sense. A casual rider may decide to use biking as an entertaining activity, and thus may decide to use the bike more leisurely for longer. Additionally, a casual rider may feel as though they need to use the bike for longer to get their money's worth as they pay an unlocking fee at the beginning of their ride that does not apply to members.  
+  
+Research into the company has revealed that casual riders pay the unlocking fee for 30 minutes of bike usage, paying additional each minute over this period. For annual members, this primary period is extended by 15 minutes. Despite this, 75% of member rides do not last even half the time allotted, 25% of casual rides are at least 10 minutes over the allotted time.

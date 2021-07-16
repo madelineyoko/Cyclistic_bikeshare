@@ -267,4 +267,86 @@ Both populations are positively skewed.
 #### Thoughts:  
 On the assumption that annual members have integrated bike riding more deeply into their everyday lives, the use of the bicycle for shorter amounts of time on average does make some sense. A casual rider may decide to use biking as an entertaining activity, and thus may decide to use the bike more leisurely for longer. Additionally, a casual rider may feel as though they need to use the bike for longer to get their money's worth as they pay an unlocking fee at the beginning of their ride that does not apply to members.  
   
-Research into the company has revealed that casual riders pay the unlocking fee for 30 minutes of bike usage, paying additional each minute over this period. For annual members, this primary period is extended by 15 minutes. Despite this, 75% of member rides do not last even half the time allotted, 25% of casual rides are at least 10 minutes over the allotted time.
+Research into the company has revealed that casual riders pay the unlocking fee for 30 minutes of bike usage, paying additional each minute over this period. For annual members, this primary period is extended by 15 minutes. Despite this, 75% of member rides do not last even half the time allotted, 25% of casual rides are at least 10 minutes over the allotted time.  
+  
+  
+### Pursuit: Visited Stations
+Do the most visited stations differ between casual riders and members
+
+#### Process:
+I began with tables for both the top start stations and end stations, separated by user type. After determining that there little difference between the most used start stations vs end stations, I combined the two columns and measured most visits, selecting the top 20 stations from each list. 
+   
+ This query made use of the UNION ALL clause, in order to combine all instances of the station_name being recorded, and to combine the start and end station columns.
+```SQL
+--CASUAL
+SELECT 
+	TOP 20
+	temp.station_name,
+	SUM(temp.no_visits) AS no_visits
+FROM (
+		SELECT
+			DISTINCT start_station_name AS station_name,
+			user_type,
+			COUNT(*) as no_visits
+		FROM
+			trip_data_clean_v3
+		WHERE
+			user_type = 'casual'
+		GROUP BY 
+			start_station_name, user_type
+
+		UNION ALL
+
+		SELECT
+			DISTINCT end_station_name AS station_name,
+			user_type,
+			COUNT(*) as no_visits
+		FROM
+			trip_data_clean_v3
+		WHERE
+			user_type = 'casual'
+		GROUP BY 
+			end_station_name, user_type
+		) as temp
+GROUP BY 
+	temp.station_name
+ORDER BY 
+	SUM(temp.no_visits) DESC
+;
+
+--MEMBERS
+SELECT 
+	TOP 20
+	temp.station_name,
+	SUM(temp.no_visits) AS no_visits
+FROM (
+		SELECT
+			DISTINCT start_station_name AS station_name,
+			user_type,
+			COUNT(*) as no_visits
+		FROM
+			trip_data_clean_v3
+		WHERE
+			user_type = 'member'
+		GROUP BY 
+			start_station_name, user_type
+
+		UNION ALL
+
+		SELECT
+			DISTINCT end_station_name AS station_name,
+			user_type,
+			COUNT(*) as no_visits
+		FROM
+			trip_data_clean_v3
+		WHERE
+			user_type = 'member'
+		GROUP BY 
+			end_station_name, user_type
+		) as temp
+GROUP BY 
+	temp.station_name
+ORDER BY 
+	SUM(temp.no_visits) DESC
+;
+```

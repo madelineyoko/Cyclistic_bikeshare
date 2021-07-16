@@ -350,3 +350,15 @@ ORDER BY
 	SUM(temp.no_visits) DESC
 ;
 ```
+#### Observations:
+![image](https://user-images.githubusercontent.com/87314229/125971807-485789e2-7e9c-4602-95ca-571a401c9c81.png)  
+*(Table: Top 20 Most Visited Stations, casual vs member)*  
+  
+The dark blue highlighted station names represent stations which are common to both lists.  
+
+The popularity of certain stations is more significant in terms of casual riders. The most visited station, Streeter Dr & Grand Ave, has 20,261 more visits than the second most visited station, Lake Shore Dr & Monroe St. This more than double the difference between members most visited stations, Clark St & Elm St and Wells St & Concord Ln, just 9522 visit difference betwen them.
+
+This is reflected through the entire list. The difference between the most visited station of the casual rides and the least is 54,270 rides. For member rides, the difference between the top and bottom of the top 20 is 19,631 rides.  
+  
+#### Thoughts:
+The top four locations of casual rides is suggestive of their purpose. All four are located in locale that provides entertainment and potentially more leisure activites, such as the pier, the park and even the theatre. The top four locations of member rides are nearby or inside business districts, indicative of places of employement or errands. 

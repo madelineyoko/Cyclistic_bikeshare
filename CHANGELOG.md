@@ -68,3 +68,13 @@ trip_data_clean_v2 -> removed `SELECT` for:
 * `DATEDIFF(month, started_at, ended_at) AS duration_months`
  
 No duration over 24 hours. No longer need indication of days/months passed.
+
+
+### 2021-07-16
+#### Added  
+* new table -- trip_data_clean_v2
+  
+#### Fixed
+trip_data_clean_v3 --> Altered duration column:
+* `DATEDIFF(second, started_at, ended_at) AS duration` --> `DATEDIFF(minute, started_at, ended_at) AS duration`  
+Choosing to analyze the duration of rides in minutes rather than in seconds

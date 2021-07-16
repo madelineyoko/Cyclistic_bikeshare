@@ -198,3 +198,61 @@ Members are much more evenly split. While Saturday sees the highest amount of us
 It is not deeply surprising that for casual users the weeekends see the most usage of bikes.  
 From this information one could assume that for the majority of casual riders, biking is not incorporated into their regular schedule. While a casual member may be more inclined to ocassionally use a bike for transportation or an entertaining activity, an annual member likely uses the bike regularly in their day to day like, whether for commuting to work, for exercising, or running errands.
 
+## 2021-07-16
+### Pursuit: Length of ride
+Do casual riders and annual members tend to ride for the same length of time?
+
+#### Process:
+In order to examine durations for rides among casual riders and annual members, I altered the table once more. Rather than observe the duration of rides in seconds, I chose to obeserve them in minutes. Ride length in minutes gives a more immediate understanding of the length, and the specificity of seconds would mostly likely not provide any additional insight.  
+  
+The query for the working table:  
+```SQL
+SELECT * INTO trip_data_clean_v3 FROM (
+	SELECT
+		DISTINCT ride_id,
+		member_casual AS user_type,
+		rideable_type AS bike_type,
+		start_station_name,
+		end_station_name,
+		started_at,
+		ended_at,
+		DATEDIFF(minute, started_at, ended_at) AS duration
+	FROM
+		trip_data
+	WHERE
+			(start_station_name IS NOT NULL 
+			AND end_station_name IS NOT NULL)
+		AND
+			(start_station_name <> 'WATSON TESTING - DIVVY'
+			AND end_station_name <> 'WATSON TESTING - DIVVY')
+		AND
+			(ended_at - started_at > 0)
+		AND
+			DATEDIFF(second, started_at, ended_at) < 86400
+		AND 
+			DATEDIFF(second, started_at, ended_at) > 59
+) as temp;
+```
+  
+From this table I created a query to pull a table of descriptive statistics. This query makes heavy use of window functions, specifically `AVG()` and `PERCENTILE_CONT()` to retrieve the minimum and maximum ride lengths, the 1st and 3rd quartiles, the median and the mean of ride lengths. These measures are also distinguished by user type.  
+```SQL
+SELECT 
+	DISTINCT user_type,
+	PERCENTILE_CONT(0)
+		WITHIN GROUP(ORDER BY duration) OVER (PARTITION BY user_type) AS min_drtn,
+	PERCENTILE_CONT(0.25)
+		WITHIN GROUP(ORDER BY duration) OVER (PARTITION BY user_type) AS [25%],
+	PERCENTILE_CONT(0.5)
+		WITHIN GROUP(ORDER BY duration) OVER (PARTITION BY user_type) AS median,
+	AVG(DATEDIFF(MINUTE, started_at, ended_at)) OVER
+		(PARTITION BY user_type) AS mean_drtn,
+	PERCENTILE_CONT(0.75)
+		WITHIN GROUP(ORDER BY duration) OVER (PARTITION BY user_type) AS [75%],
+	PERCENTILE_CONT(1)
+		WITHIN GROUP(ORDER BY duration) OVER (PARTITION BY user_type) AS max_drtn
+FROM trip_data_clean_v3
+;
+```  
+  
+#### Observations 
+![image](https://user-images.githubusercontent.com/87314229/125954596-e07de6f9-366d-49ac-b216-f89d0a0fc10a.png)

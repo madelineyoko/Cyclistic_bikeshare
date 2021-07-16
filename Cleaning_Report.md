@@ -17,9 +17,9 @@ Quering to find duplicates:
 ```SQL
 SELECT 
 	ride_id, 
-		COUNT(ride_id), 
-		start_station_name, 
-		end_station_name
+	COUNT(ride_id), 
+	start_station_name, 
+	end_station_name
 FROM 
 	trip_data
 GROUP BY 

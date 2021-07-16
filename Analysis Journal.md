@@ -255,4 +255,12 @@ FROM trip_data_clean_v3
 ```  
   
 #### Observations 
-![image](https://user-images.githubusercontent.com/87314229/125954596-e07de6f9-366d-49ac-b216-f89d0a0fc10a.png)
+![image](https://user-images.githubusercontent.com/87314229/125954596-e07de6f9-366d-49ac-b216-f89d0a0fc10a.png)  
+*(Table: descriptive statistics for duration of rides, casual vs members)  
+
+The range of ride durations included in the analysis extended from a minimum of 1 minute to 24 hours. The maximum and minimum ranges for both user types reflect this.  
+  
+Each measure for duration is longer in the casual user. On average, rides by casual users seem to last 20 minutes longer than rides by annual members. Member rides are notably still shorter at the 3rd quartile than the casual ride average. 
+  
+#### Thoughts  
+  

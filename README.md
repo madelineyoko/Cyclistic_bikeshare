@@ -41,3 +41,23 @@ In summary I made the following changes:
   
   
 ## Analyze
+  
+A full summary of my analysis process can be found [here](https://github.com/madelineyoko/Cyclistic_bikeshare/blob/main/Analysis%20Journal.md).  
+  
+I explored several variables for differences in behaviour between annual members and casual riders:
+* use of bicyle types
+* prefered month of ride
+* prefered day of week
+* usual length of ride
+* most visited stations
+  
+I created several early draft visualizations. Below are some examples.  
+  
+![image](https://user-images.githubusercontent.com/87314229/126211131-7b051739-a4e0-467e-8bbf-2b534d3b0972.png)  
+  
+![image](https://user-images.githubusercontent.com/87314229/126211179-c4a33472-94f7-4c7d-867f-7624812e897b.png)  
+  
+![image](https://user-images.githubusercontent.com/87314229/126211208-d419afe5-0c8e-42d0-b700-09383505bd03.png)
+
+
+## Share

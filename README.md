@@ -18,3 +18,26 @@ The current task is to analyze the data and identify key behavioural differences
   
 ## Prepare
   
+The data used in the project comes is stored in AWS (Amazon Web services). I am using only the past 12 months of trip data, beginning in 2020-06 and ending in 2021-05.
+The data is collected directly from Cyclistic and has been made available by Motivate Internation Inc. under [this license](https://www.divvybikes.com/data-license-agreement). The data has been anonymized and no personally identifiable information has been included in the data.  While this will prevent analysis which would examine specific personal traits of individual riders, such as individual history or areas of residence, there is still enough data to identify certain behaviours.  
+  
+## Process (Data Cleaning)
+  
+The primary tools for my analysis are Microsoft SQL Server, and Google Sheets.  
+  
+The extensive report for the cleaning process can be found [here](https://github.com/madelineyoko/Cyclistic_bikeshare/blob/main/Cleaning_Report.md).  
+In summary I made the following changes:  
+  
+* Removed duplicate rows
+* Removed rows with null values concerning start and end stations
+* Excluded rows reporting electric bike testing
+* Excluded geographical coordinates
+* Ensured consistency in datatypes across variables
+* Altered variable names
+  * bike used during ride = `bike_type`
+  * user membership status = `user_type`
+* Created a column to report duration of each ride
+* Excluded trips lasting less than 1 minute, or over 24 hours
+  
+  
+## Analyze

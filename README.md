@@ -61,3 +61,18 @@ I created several early draft visualizations. Below are some examples.
 
 
 ## Share
+![image](https://user-images.githubusercontent.com/87314229/126376705-d7dd7b8a-79ec-41b6-a2bd-2aa5d0933a9e.png)  
+*(Cyclistic Dashboard, measuring behavioural differences between casual riders and annual members)*  
+  
+Key notable differences: 
+* Casual riders tend to ride 10+ minutes longer than annual members  
+* Casual riders favour the weekend days, Saturday and Sunday
+* Casual riders ride the most in July and August and the least in January and Feburary  
+  
+  
+
+## Act
+My recommendations for the marketing strategy are as follows:
+1. Offer discounted annual memberships in the months leading up to the summer months
+2. Member exclusive deals on weekends, discounted ebikes, prebooking etc.
+3. Aim advertising intiatives majorly in top 20 casual heavy stations
